@@ -23,8 +23,6 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "global.h"
-#include "input_reading.h"
-#include "input_processing.h"
 #include "fsm_automatic.h"
 #include "fsm_manual.h"
 /* USER CODE END Includes */
@@ -36,6 +34,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define initCounter 1
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -60,7 +59,42 @@ static void MX_GPIO_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+enum waitingState {on,off};
+enum waitingState state = on;
+static int counterWaitingMode = initCounter;
 
+void blinkSystem(){
+	HAL_GPIO_TogglePin(LED_RED1_GPIO_Port, LED_RED1_Pin);
+	HAL_GPIO_TogglePin(LED_GREEN1_GPIO_Port, LED_GREEN1_Pin);
+	HAL_GPIO_TogglePin(LED_YELLOW1_GPIO_Port, LED_YELLOW1_Pin);
+	HAL_GPIO_TogglePin(LED_RED2_GPIO_Port, LED_RED2_Pin);
+	HAL_GPIO_TogglePin(LED_GREEN2_GPIO_Port, LED_GREEN2_Pin);
+	HAL_GPIO_TogglePin(LED_YELLOW2_GPIO_Port, LED_YELLOW2_Pin);
+}
+
+void fsmInit(){
+	switch (state){
+		case on:
+			blinkSystem();
+			counterWaitingMode--;
+			if (counterWaitingMode == 0){
+				counterWaitingMode = initCounter;
+				state = off;
+			}
+			break;
+		case off:
+			blinkSystem();
+			counterWaitingMode--;
+			if (counterWaitingMode == 0){
+				counterWaitingMode = initCounter;
+				state = on;
+			}
+			break;
+		default:
+			break;
+	}
+	HAL_Delay(1000);
+}
 /* USER CODE END 0 */
 
 /**
@@ -97,17 +131,29 @@ int main(void)
   /* USER CODE END 2 */
 
   /* Infinite loop */
+  status1 = INIT;
+  status2 = INIT;
   /* USER CODE BEGIN WHILE */
-  status = INIT;
   while (1)
   {
-	  fsm_automatic_run();
-	  fsm_manual_run();
-//	  if (button1_flag == 1){
-//		  button1_flag = 0;
+	  //Testing button state
+//	  HAL_GPIO_WritePin(LED_RED1_GPIO_Port, LED_RED1_Pin,
+//			  HAL_GPIO_ReadPin(BUTTON1_GPIO_Port, BUTTON1_Pin));
+
+	  // Press to toggle the led
+//	  if (HAL_GPIO_ReadPin(BUTTON1_GPIO_Port, BUTTON1_Pin) == GPIO_PIN_RESET){
 //		  HAL_GPIO_TogglePin(LED_RED1_GPIO_Port, LED_RED1_Pin);
-//
 //	  }
+
+	  // New mechanism
+//	  if (isButton1Pressed()==1){
+//		  HAL_GPIO_TogglePin(LED_RED1_GPIO_Port, LED_RED1_Pin);
+//	  }
+
+	  //FSM
+	  fsmInit();
+//	  fsm_automatic_run();
+//	  fsm_manual_run();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -237,8 +283,14 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pins : BUTTON1_Pin BUTTON2_Pin BUTTON3_Pin */
   GPIO_InitStruct.Pin = BUTTON1_Pin|BUTTON2_Pin|BUTTON3_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : BUTTON4_Pin */
+  GPIO_InitStruct.Pin = BUTTON4_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(BUTTON4_GPIO_Port, &GPIO_InitStruct);
 
 }
 

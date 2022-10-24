@@ -1,14 +1,24 @@
 /*
  * led_display.h
  *
- *  Created on: Sep 12, 2021
- *      Author: Nguyet
+ *  Created on: Oct 24, 2022
+ *      Author: acer
  */
 
 #ifndef INC_LED_DISPLAY_H_
 #define INC_LED_DISPLAY_H_
 
-uint8_t update_seven_segment_led_buffer(uint8_t val, uint8_t idx);
-void seven_segment_led_driver(void);
+#include "main.h"
+
+void enableRed1();
+void enableYellow1();
+void enableGreen1();
+
+void enableRed2();
+void enableYellow2();
+void enableGreen2();
+
+void display7SEG1();
+void display7SEG2();
 
 #endif /* INC_LED_DISPLAY_H_ */
