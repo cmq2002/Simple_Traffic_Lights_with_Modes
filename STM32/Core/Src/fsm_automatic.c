@@ -18,6 +18,12 @@ void fsm_automatic_run(void){
 				status = AUTO_GREEN;
 				setTimer1(300);
 			}
+			if (button1_flag == 1){
+				button1_flag = 0;
+				status = MAN_RED;
+				setTimer1(1000);
+			}
+			HAL_GPIO_TogglePin(LED_RED1_GPIO_Port, LED_RED1_Pin);
 			break;
 		case AUTO_GREEN:
 			if (timer1_flag == 1){

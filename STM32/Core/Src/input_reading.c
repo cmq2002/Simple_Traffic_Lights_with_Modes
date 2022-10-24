@@ -1,18 +1,21 @@
-/*
- * input_reading.c
- *
- *  Created on: Sep 20, 2021
- *      Author: NGUYEN
- */
-
-
+///*
+// * input_reading.c
+// *
+// *  Created on: Sep 20, 2021
+// *      Author: NGUYEN
+// */
+//
+//
 #include "main.h"
 
-#define NUMBER_OF_BUTTON 				1
+#define NUMBER_OF_BUTTON 				3
 #define DURATION_FOR_AUTO_INCREASING	100
 
 #define BUTTON_IS_PRESSED                  GPIO_PIN_RESET
 #define BUTTON_IS_RELEASED                 GPIO_PIN_SET
+
+//List of all button
+static uint8_t buttonList[3] = {BUTTON1_Pin, BUTTON2_Pin, BUTTON3_Pin};
 
 //the buffer that the final result is stored after deboucing
 static GPIO_PinState buttonBuffer[NUMBER_OF_BUTTON];
@@ -39,8 +42,8 @@ unsigned char is_button_press_1s(unsigned char index){
 //If the values are the same, update the value to buttonBuffer.
 void button_reading(void){
 	for(uint8_t i = 0; i < NUMBER_OF_BUTTON; i ++){
-		debounceButtonBuffer2[i] =debounceButtonBuffer1[i];
-		debounceButtonBuffer1[i] = HAL_GPIO_ReadPin(BUTTON_1_GPIO_Port, BUTTON_1_Pin);
+		debounceButtonBuffer2[i] = debounceButtonBuffer1[i];
+		debounceButtonBuffer1[i] = HAL_GPIO_ReadPin(GPIOA, buttonList[i]);
 		if(debounceButtonBuffer1[i] == debounceButtonBuffer2[i]){
 			buttonBuffer[i] = debounceButtonBuffer1[i];
 			if(buttonBuffer[i] == BUTTON_IS_PRESSED){
@@ -49,6 +52,7 @@ void button_reading(void){
 				} else {
 					flagForButtonPress1s[i] = 1;
 					//todo
+					buttonBuffer[i] = BUTTON_IS_RELEASED;
 				}
 
 			} else {
