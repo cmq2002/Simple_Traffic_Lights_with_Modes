@@ -56,8 +56,8 @@ const uint8_t sevenSegTable[10] = {
 		, 0x10 /*9*/};
 
 void display7SEG1(int num){
-	HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, SET);
-	HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, RESET);
+//	HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, SET);
+//	HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, RESET);
 	HAL_GPIO_WritePin(a_GPIO_Port, a_Pin, ((sevenSegTable[num]>>0)&0x01));
 	HAL_GPIO_WritePin(b_GPIO_Port, b_Pin, ((sevenSegTable[num]>>1)&0x01));
 	HAL_GPIO_WritePin(c_GPIO_Port, c_Pin, ((sevenSegTable[num]>>2)&0x01));
@@ -68,8 +68,8 @@ void display7SEG1(int num){
 }
 
 void display7SEG2(int num){
-	HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, SET);
-	HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, RESET);
+//	HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, SET);
+//	HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, RESET);
 	HAL_GPIO_WritePin(a1_GPIO_Port, a1_Pin, ((sevenSegTable[num]>>0)&0x01));
 	HAL_GPIO_WritePin(b1_GPIO_Port, b1_Pin, ((sevenSegTable[num]>>1)&0x01));
 	HAL_GPIO_WritePin(c1_GPIO_Port, c1_Pin, ((sevenSegTable[num]>>2)&0x01));
@@ -79,34 +79,20 @@ void display7SEG2(int num){
 	HAL_GPIO_WritePin(g1_GPIO_Port, g1_Pin, ((sevenSegTable[num]>>6)&0x01));
 }
 
-void blink7SEG1(int num){
-	if (timer3_flag == 1){
-		HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, RESET);
-		HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, SET);
-		display7SEG1(num/10);
-		setTimer3(50);
-	}
-
-	if (timer3_flag == 1){
-		HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, SET);
-		HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, RESET);
-		display7SEG1(num%10);
-		setTimer3(50);
-	}
+void blink7SEG1(int num1, int num2){
+	HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, RESET);
+	HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, SET);
+	display7SEG1(num1);
+	HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, RESET);
+	HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, SET);
+	display7SEG2(num2);
 }
 
-void blink7SEG2(int num){
-	if (timer4_flag == 1){
-		HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, RESET);
-		HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, SET);
-		display7SEG2(num/10);
-		setTimer4(50);
-	}
-
-	if (timer4_flag == 1){
-		HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, SET);
-		HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, RESET);
-		display7SEG2(num%10);
-		setTimer4(50);
-	}
+void blink7SEG2(int num1, int num2){
+	HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, SET);
+	HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, RESET);
+	display7SEG1(num1);
+	HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, SET);
+	HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, RESET);
+	display7SEG2(num2);
 }

@@ -22,7 +22,7 @@ void enableGreen2();
 void display7SEG1(int num);
 void display7SEG2(int num);
 
-void blink7SEG1(int num);
-void blink7SEG2(int num);
+void blink7SEG1(int num1, int num2);
+void blink7SEG2(int num1, int num2);
 
 #endif /* INC_LED_DISPLAY_H_ */

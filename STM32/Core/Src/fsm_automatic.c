@@ -21,7 +21,7 @@ void fsm_automatic_run(void){
 				if (timer1_flag == 1){
 					enableRed1();
 					led_buffer[0] = counterRed1;
-					display7SEG1(counterRed1%10);
+//					display7SEG1(counterRed1%10);
 					counterRed1--;
 					if (counterRed1 == THRESHOLD){
 						counterRed1 = AUTO_RED;
@@ -34,7 +34,7 @@ void fsm_automatic_run(void){
 				if (timer1_flag == 1){
 					enableGreen1();
 					led_buffer[0] = counterGreen1;
-					display7SEG1(counterGreen1%10);
+//					display7SEG1(counterGreen1%10);
 					counterGreen1--;
 					if (counterGreen1 == THRESHOLD){
 						counterGreen1 = AUTO_GREEN;
@@ -47,7 +47,7 @@ void fsm_automatic_run(void){
 				if (timer1_flag == 1){
 					enableYellow1();
 					led_buffer[0] = counterYellow1;
-					display7SEG1(counterYellow1%10);
+//					display7SEG1(counterYellow1%10);
 					counterYellow1--;
 					if (counterYellow1 == THRESHOLD){
 						counterYellow1 = AUTO_YELLOW;
@@ -70,7 +70,7 @@ void fsm_automatic_run(void){
 				if (timer2_flag == 1){
 					enableRed2();
 					led_buffer[1] = counterRed2;
-					display7SEG2(counterRed2%10);
+//					display7SEG2(counterRed2%10);
 					counterRed2--;
 					if (counterRed2 == THRESHOLD){
 						counterRed2 = AUTO_RED;
@@ -83,7 +83,7 @@ void fsm_automatic_run(void){
 				if (timer2_flag == 1){
 					enableGreen2();
 					led_buffer[1] = counterGreen2;
-					display7SEG2(counterGreen2%10);
+//					display7SEG2(counterGreen2%10);
 					counterGreen2--;
 					if (counterGreen2 == THRESHOLD){
 						counterGreen2 = AUTO_GREEN;
@@ -96,7 +96,7 @@ void fsm_automatic_run(void){
 				if (timer2_flag == 1){
 					enableYellow2();
 					led_buffer[1] = counterYellow2;
-					display7SEG2(counterYellow2%10);
+//					display7SEG2(counterYellow2%10);
 					counterYellow2--;
 					if (counterYellow2 == THRESHOLD){
 						counterYellow2 = AUTO_YELLOW;
@@ -111,10 +111,22 @@ void fsm_automatic_run(void){
 	}
 	switch (status3){
 		case INIT:
+			status3 = DOZEN;
+			setTimer3(1);
 			break;
 		case DOZEN:
+			if (timer3_flag == 1){
+				blink7SEG1(led_buffer[0]/10, led_buffer[1]/10);
+				status3 = UNIT;
+				setTimer3(50);
+			}
 			break;
 		case UNIT:
+			if (timer3_flag == 1){
+				blink7SEG2(led_buffer[0]%10, led_buffer[1]%10);
+				status3 = DOZEN;
+				setTimer3(50);
+			}
 			break;
 		default:
 			break;

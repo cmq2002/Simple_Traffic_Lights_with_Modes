@@ -7,4 +7,4 @@ led_display.c:37:6:enableGreen2	8	static
 led_display.c:58:6:display7SEG1	16	static
 led_display.c:70:6:display7SEG2	16	static
 led_display.c:82:6:blink7SEG1	16	static
-led_display.c:98:6:blink7SEG2	16	static
+led_display.c:91:6:blink7SEG2	16	static
