@@ -34,7 +34,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define initCounter 1
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -59,57 +59,7 @@ static void MX_GPIO_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-//enum waitingState {on,off};
-//enum waitingState state = on;
-//static int counterWaitingMode = initCounter;
-//
-//void blinkSystem(){
-//	HAL_GPIO_TogglePin(LED_RED1_GPIO_Port, LED_RED1_Pin);
-//	HAL_GPIO_TogglePin(LED_GREEN1_GPIO_Port, LED_GREEN1_Pin);
-//	HAL_GPIO_TogglePin(LED_YELLOW1_GPIO_Port, LED_YELLOW1_Pin);
-//	HAL_GPIO_TogglePin(LED_RED2_GPIO_Port, LED_RED2_Pin);
-//	HAL_GPIO_TogglePin(LED_GREEN2_GPIO_Port, LED_GREEN2_Pin);
-//	HAL_GPIO_TogglePin(LED_YELLOW2_GPIO_Port, LED_YELLOW2_Pin);
-//}
-//
-//void fsmInit(){
-//	switch (state){
-//		case on:
-//			blinkSystem();
-//			counterWaitingMode--;
-//			if (counterWaitingMode == 0){
-//				counterWaitingMode = initCounter;
-//				state = off;
-//			}
-//			break;
-//		case off:
-//			blinkSystem();
-//			counterWaitingMode--;
-//			if (counterWaitingMode == 0){
-//				counterWaitingMode = initCounter;
-//				state = on;
-//			}
-//			break;
-//		default:
-//			break;
-//	}
-//	HAL_Delay(1000);
-//}
 
-void initVar(){
-	  status1 = INIT;
-	  status2 = INIT;
-	  status3 = INIT;
-	  mode = INIT;
-
-	  counterRed1 = AUTO_RED;
-	  counterGreen1 = AUTO_GREEN;
-	  counterYellow1 = AUTO_YELLOW;
-
-	  counterRed2 = AUTO_RED;
-	  counterGreen2 = AUTO_GREEN;
-	  counterYellow2 = AUTO_YELLOW;
-}
 /* USER CODE END 0 */
 
 /**
@@ -144,9 +94,10 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT (& htim2 ) ;
   /* USER CODE END 2 */
-
-  /* Infinite loop */
+  initWaitingTime();
   initVar();
+  /* Infinite loop */
+
   /* USER CODE BEGIN WHILE */
   while (1)
   {
@@ -169,30 +120,28 @@ int main(void)
 		  mode = MODE1;
 	  }
 
-	  if (isButtonPressed(BUTTON1)==1){
-		  int state = timeButtonPressed(BUTTON1)%NUM_OF_BUTTON;
-		  switch(state){
-			  case 0:
-				  mode = MODE1;
-				  break;
-			  case 1:
-				  mode = MODE2;
-				  break;
-			  case 2:
-				  mode = MODE3;
-				  break;
-			  case 3:
-				  mode = MODE4;
-				  break;
-			  default:
-				  break;
-		  }
-	  }
+//	  if (isButtonPressed(BUTTON1)==1){
+//		  int state = timeButtonPressed(BUTTON1)%NUM_OF_BUTTON;
+//		  switch(state){
+//			  case 0:
+//				  mode = MODE1;
+//				  break;
+//			  case 1:
+//				  mode = MODE2;
+//				  break;
+//			  case 2:
+//				  mode = MODE3;
+//				  break;
+//			  case 3:
+//				  mode = MODE4;
+//				  break;
+//			  default:
+//				  break;
+//		  }
+//	  }
 
 	  fsm_automatic_run();
-
-
-//	  fsm_manual_run();
+	  fsm_manual_run();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

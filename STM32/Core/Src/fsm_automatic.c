@@ -12,46 +12,45 @@ int led_buffer[2] = {0,0};
 void fsm_automatic_run(void){
 	if (mode==MODE1){
 		//For W-E direction
-		switch (status1){
+		switch (statusAUTO1){
 			case INIT:
-				status1 = AUTO_RED;
-				setTimer1(1);
+				statusAUTO1 = STATE_RED;
+				setTimer1(100);
 				break;
-			case AUTO_RED:
+			case STATE_RED:
 				if (timer1_flag == 1){
 					enableRed1();
 					led_buffer[0] = counterRed1;
-//					display7SEG1(counterRed1%10);
 					counterRed1--;
-					if (counterRed1 == THRESHOLD){
+					if (counterRed1 == INIT){
 						counterRed1 = AUTO_RED;
-						status1 = AUTO_GREEN;
+						statusAUTO1 = STATE_GREEN;
 					}
 					setTimer1(100);
+					if (isButtonPressed(BUTTON1)==1 && timeButtonPressed(BUTTON1)%NUM_OF_BUTTON==1)
+						mode = MODE2;
 				}
 				break;
-			case AUTO_GREEN:
+			case STATE_GREEN:
 				if (timer1_flag == 1){
 					enableGreen1();
 					led_buffer[0] = counterGreen1;
-//					display7SEG1(counterGreen1%10);
 					counterGreen1--;
-					if (counterGreen1 == THRESHOLD){
+					if (counterGreen1 == INIT){
 						counterGreen1 = AUTO_GREEN;
-						status1 = AUTO_YELLOW;
+						statusAUTO1 = STATE_YELLOW;
 					}
 					setTimer1(100);
 				}
 				break;
-			case AUTO_YELLOW:
+			case STATE_YELLOW:
 				if (timer1_flag == 1){
 					enableYellow1();
 					led_buffer[0] = counterYellow1;
-//					display7SEG1(counterYellow1%10);
 					counterYellow1--;
-					if (counterYellow1 == THRESHOLD){
+					if (counterYellow1 == INIT){
 						counterYellow1 = AUTO_YELLOW;
-						status1 = AUTO_RED;
+						statusAUTO1 = STATE_RED;
 					}
 					setTimer1(100);
 				}
@@ -61,46 +60,43 @@ void fsm_automatic_run(void){
 		}
 
 		//For N-S direction
-		switch (status2){
+		switch (statusAUTO2){
 			case INIT:
-				status2 = AUTO_GREEN;
-				setTimer2(1);
+				statusAUTO2 = STATE_GREEN;
+				setTimer2(100);
 				break;
-			case AUTO_RED:
+			case STATE_RED:
 				if (timer2_flag == 1){
 					enableRed2();
 					led_buffer[1] = counterRed2;
-//					display7SEG2(counterRed2%10);
 					counterRed2--;
-					if (counterRed2 == THRESHOLD){
+					if (counterRed2 == INIT){
 						counterRed2 = AUTO_RED;
-						status2 = AUTO_GREEN;
+						statusAUTO2 = STATE_GREEN;
 					}
 					setTimer2(100);
 				}
 				break;
-			case AUTO_GREEN:
+			case STATE_GREEN:
 				if (timer2_flag == 1){
 					enableGreen2();
 					led_buffer[1] = counterGreen2;
-//					display7SEG2(counterGreen2%10);
 					counterGreen2--;
-					if (counterGreen2 == THRESHOLD){
+					if (counterGreen2 == INIT){
 						counterGreen2 = AUTO_GREEN;
-						status2 = AUTO_YELLOW;
+						statusAUTO2 = STATE_YELLOW;
 					}
 					setTimer2(100);
 				}
 				break;
-			case AUTO_YELLOW:
+			case STATE_YELLOW:
 				if (timer2_flag == 1){
 					enableYellow2();
 					led_buffer[1] = counterYellow2;
-//					display7SEG2(counterYellow2%10);
 					counterYellow2--;
-					if (counterYellow2 == THRESHOLD){
+					if (counterYellow2 == INIT){
 						counterYellow2 = AUTO_YELLOW;
-						status2 = AUTO_RED;
+						statusAUTO2 = STATE_RED;
 					}
 					setTimer2(100);
 				}
@@ -109,58 +105,58 @@ void fsm_automatic_run(void){
 				break;
 		}
 	}
-	switch (status3){
+	switch (statusAUTO3){
 		case INIT:
-			status3 = DOZEN;
-			setTimer3(1);
+			statusAUTO3 = DOZEN;
+			setTimer3(100);
 			break;
 		case DOZEN:
 			if (timer3_flag == 1){
-				blink7SEG1(led_buffer[0]/10, led_buffer[1]/10);
-				status3 = UNIT;
-				setTimer3(40);
+				blinkDigit1(led_buffer[0], led_buffer[1]);
+				statusAUTO3 = UNIT;
+				setTimer3(50);
 			}
 			break;
 		case UNIT:
 			if (timer3_flag == 1){
-				blink7SEG2(led_buffer[0]%10, led_buffer[1]%10);
-				status3 = DOZEN;
-				setTimer3(60);
+				blinkDigit2(led_buffer[0], led_buffer[1]);
+				statusAUTO3 = DOZEN;
+				setTimer3(50);
 			}
 			break;
 		default:
 			break;
 	}
-//	switch (status){
-//		case INIT:
-//			status = AUTO_RED;
-//			setTimer1(500);
-//			break;
-//		case AUTO_RED:
-//			if (timer1_flag == 1){
-//				status = AUTO_GREEN;
-//				setTimer1(300);
-//			}
-//			if (button1_flag == 1){
-//				button1_flag = 0;
-//				status = MAN_RED;
-//				setTimer1(1000);
-//			}
-//			HAL_GPIO_TogglePin(LED_RED1_GPIO_Port, LED_RED1_Pin);
-//			break;
-//		case AUTO_GREEN:
-//			if (timer1_flag == 1){
-//				status = AUTO_YELLOW;
-//				setTimer1(200);
-//			}
-//			break;
-//		case AUTO_YELLOW:
-//			if (timer1_flag == 1){
-//				status = AUTO_RED;
-//				setTimer1(500);
-//			}
-//			break;
-//		default:
-//			break;
-//	}
+	//	switch (status){
+	//		case INIT:
+	//			status = AUTO_RED;
+	//			setTimer1(500);
+	//			break;
+	//		case AUTO_RED:
+	//			if (timer1_flag == 1){
+	//				status = AUTO_GREEN;
+	//				setTimer1(300);
+	//			}
+	//			if (button1_flag == 1){
+	//				button1_flag = 0;
+	//				status = MAN_RED;
+	//				setTimer1(1000);
+	//			}
+	//			HAL_GPIO_TogglePin(LED_RED1_GPIO_Port, LED_RED1_Pin);
+	//			break;
+	//		case AUTO_GREEN:
+	//			if (timer1_flag == 1){
+	//				status = AUTO_YELLOW;
+	//				setTimer1(200);
+	//			}
+	//			break;
+	//		case AUTO_YELLOW:
+	//			if (timer1_flag == 1){
+	//				status = AUTO_RED;
+	//				setTimer1(500);
+	//			}
+	//			break;
+	//		default:
+	//			break;
+	//	}
 }

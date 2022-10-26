@@ -40,6 +40,19 @@ void enableGreen2(){
 	HAL_GPIO_WritePin(LED_YELLOW2_GPIO_Port, LED_YELLOW2_Pin, SET);
 }
 
+void toggleREDs(){
+	HAL_GPIO_TogglePin(LED_RED1_GPIO_Port, LED_RED1_Pin);
+	HAL_GPIO_TogglePin(LED_RED2_GPIO_Port, LED_RED2_Pin);
+}
+void toggleGREENs(){
+	HAL_GPIO_TogglePin(LED_GREEN1_GPIO_Port, LED_GREEN1_Pin);
+	HAL_GPIO_TogglePin(LED_GREEN2_GPIO_Port, LED_GREEN2_Pin);
+}
+void toggleYELLOWs(){
+	HAL_GPIO_TogglePin(LED_YELLOW1_GPIO_Port, LED_YELLOW1_Pin);
+	HAL_GPIO_TogglePin(LED_YELLOW2_GPIO_Port, LED_YELLOW2_Pin);
+}
+
 //Transfer sequence: gfedcba
 //MSB=g, LSB=a <- Active low
 //Ex: To display 0 -> sequence = 1000000
@@ -56,8 +69,6 @@ const uint8_t sevenSegTable[10] = {
 		, 0x10 /*9*/};
 
 void display7SEG1(int num){
-//	HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, SET);
-//	HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, RESET);
 	HAL_GPIO_WritePin(a_GPIO_Port, a_Pin, ((sevenSegTable[num]>>0)&0x01));
 	HAL_GPIO_WritePin(b_GPIO_Port, b_Pin, ((sevenSegTable[num]>>1)&0x01));
 	HAL_GPIO_WritePin(c_GPIO_Port, c_Pin, ((sevenSegTable[num]>>2)&0x01));
@@ -68,8 +79,6 @@ void display7SEG1(int num){
 }
 
 void display7SEG2(int num){
-//	HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, SET);
-//	HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, RESET);
 	HAL_GPIO_WritePin(a1_GPIO_Port, a1_Pin, ((sevenSegTable[num]>>0)&0x01));
 	HAL_GPIO_WritePin(b1_GPIO_Port, b1_Pin, ((sevenSegTable[num]>>1)&0x01));
 	HAL_GPIO_WritePin(c1_GPIO_Port, c1_Pin, ((sevenSegTable[num]>>2)&0x01));
@@ -79,20 +88,20 @@ void display7SEG2(int num){
 	HAL_GPIO_WritePin(g1_GPIO_Port, g1_Pin, ((sevenSegTable[num]>>6)&0x01));
 }
 
-void blink7SEG1(int num1, int num2){
+void blinkDigit1(int num1, int num2){
 	HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, RESET);
 	HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, SET);
-	display7SEG1(num1);
+	display7SEG1(num1/10);
 	HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, RESET);
 	HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, SET);
-	display7SEG2(num2);
+	display7SEG2(num2/10);
 }
 
-void blink7SEG2(int num1, int num2){
+void blinkDigit2(int num1, int num2){
 	HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, SET);
 	HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, RESET);
-	display7SEG1(num1);
+	display7SEG1(num1%10);
 	HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, SET);
 	HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, RESET);
-	display7SEG2(num2);
+	display7SEG2(num2%10);
 }
