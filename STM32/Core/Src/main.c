@@ -59,41 +59,55 @@ static void MX_GPIO_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-enum waitingState {on,off};
-enum waitingState state = on;
-static int counterWaitingMode = initCounter;
+//enum waitingState {on,off};
+//enum waitingState state = on;
+//static int counterWaitingMode = initCounter;
+//
+//void blinkSystem(){
+//	HAL_GPIO_TogglePin(LED_RED1_GPIO_Port, LED_RED1_Pin);
+//	HAL_GPIO_TogglePin(LED_GREEN1_GPIO_Port, LED_GREEN1_Pin);
+//	HAL_GPIO_TogglePin(LED_YELLOW1_GPIO_Port, LED_YELLOW1_Pin);
+//	HAL_GPIO_TogglePin(LED_RED2_GPIO_Port, LED_RED2_Pin);
+//	HAL_GPIO_TogglePin(LED_GREEN2_GPIO_Port, LED_GREEN2_Pin);
+//	HAL_GPIO_TogglePin(LED_YELLOW2_GPIO_Port, LED_YELLOW2_Pin);
+//}
+//
+//void fsmInit(){
+//	switch (state){
+//		case on:
+//			blinkSystem();
+//			counterWaitingMode--;
+//			if (counterWaitingMode == 0){
+//				counterWaitingMode = initCounter;
+//				state = off;
+//			}
+//			break;
+//		case off:
+//			blinkSystem();
+//			counterWaitingMode--;
+//			if (counterWaitingMode == 0){
+//				counterWaitingMode = initCounter;
+//				state = on;
+//			}
+//			break;
+//		default:
+//			break;
+//	}
+//	HAL_Delay(1000);
+//}
 
-void blinkSystem(){
-	HAL_GPIO_TogglePin(LED_RED1_GPIO_Port, LED_RED1_Pin);
-	HAL_GPIO_TogglePin(LED_GREEN1_GPIO_Port, LED_GREEN1_Pin);
-	HAL_GPIO_TogglePin(LED_YELLOW1_GPIO_Port, LED_YELLOW1_Pin);
-	HAL_GPIO_TogglePin(LED_RED2_GPIO_Port, LED_RED2_Pin);
-	HAL_GPIO_TogglePin(LED_GREEN2_GPIO_Port, LED_GREEN2_Pin);
-	HAL_GPIO_TogglePin(LED_YELLOW2_GPIO_Port, LED_YELLOW2_Pin);
-}
+void initVar(){
+	  status1 = INIT;
+	  status2 = INIT;
+	  mode = INIT;
 
-void fsmInit(){
-	switch (state){
-		case on:
-			blinkSystem();
-			counterWaitingMode--;
-			if (counterWaitingMode == 0){
-				counterWaitingMode = initCounter;
-				state = off;
-			}
-			break;
-		case off:
-			blinkSystem();
-			counterWaitingMode--;
-			if (counterWaitingMode == 0){
-				counterWaitingMode = initCounter;
-				state = on;
-			}
-			break;
-		default:
-			break;
-	}
-	HAL_Delay(1000);
+	  counterRed1 = AUTO_RED;
+	  counterGreen1 = AUTO_GREEN;
+	  counterYellow1 = AUTO_YELLOW;
+
+	  counterRed2 = AUTO_RED;
+	  counterGreen2 = AUTO_GREEN;
+	  counterYellow2 = AUTO_YELLOW;
 }
 /* USER CODE END 0 */
 
@@ -131,8 +145,6 @@ int main(void)
   /* USER CODE END 2 */
 
   /* Infinite loop */
-  status1 = INIT;
-  status2 = INIT;
   /* USER CODE BEGIN WHILE */
   while (1)
   {
@@ -151,8 +163,28 @@ int main(void)
 //	  }
 
 	  //FSM
-	  fsmInit();
-//	  fsm_automatic_run();
+	  if (isButtonPressed(BUTTON1)==1){
+		  int state = timeButtonPressed(BUTTON1)%NUM_OF_BUTTON;
+		  switch(state){
+			  case 1:
+				  mode = MODE1;
+				  break;
+			  case 2:
+				  mode = MODE2;
+				  break;
+			  case 3:
+				  mode = MODE3;
+				  break;
+			  case 0:
+				  mode = MODE4;
+				  break;
+			  default:
+				  break;
+		  }
+	  }
+	  fsm_automatic_run();
+
+
 //	  fsm_manual_run();
     /* USER CODE END WHILE */
 
@@ -259,8 +291,10 @@ static void MX_GPIO_Init(void)
                           |LED_YELLOW1_Pin|LED_GREEN1_Pin|EN0_Pin|EN1_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, a_Pin|b_Pin|c_Pin|d_Pin
-                          |e_Pin|f_Pin|g_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, a_Pin|b_Pin|c_Pin|d1_Pin
+                          |e1_Pin|f1_Pin|g1_Pin|EN3_Pin
+                          |EN2_Pin|d_Pin|e_Pin|f_Pin
+                          |g_Pin|a1_Pin|b1_Pin|c1_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : LED_RED2_Pin LED_YELLOW2_Pin LED_GREEN2_Pin LED_RED1_Pin
                            LED_YELLOW1_Pin LED_GREEN1_Pin EN0_Pin EN1_Pin */
@@ -271,10 +305,14 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : a_Pin b_Pin c_Pin d_Pin
-                           e_Pin f_Pin g_Pin */
-  GPIO_InitStruct.Pin = a_Pin|b_Pin|c_Pin|d_Pin
-                          |e_Pin|f_Pin|g_Pin;
+  /*Configure GPIO pins : a_Pin b_Pin c_Pin d1_Pin
+                           e1_Pin f1_Pin g1_Pin EN3_Pin
+                           EN2_Pin d_Pin e_Pin f_Pin
+                           g_Pin a1_Pin b1_Pin c1_Pin */
+  GPIO_InitStruct.Pin = a_Pin|b_Pin|c_Pin|d1_Pin
+                          |e1_Pin|f1_Pin|g1_Pin|EN3_Pin
+                          |EN2_Pin|d_Pin|e_Pin|f_Pin
+                          |g_Pin|a1_Pin|b1_Pin|c1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

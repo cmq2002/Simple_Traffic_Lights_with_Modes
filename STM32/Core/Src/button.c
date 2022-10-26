@@ -7,17 +7,16 @@
 
 #include "button.h"
 
-#define NUM_OF_BUTTON 4
+int buttonList[NUM_OF_BUTTON] = {BUTTON1_Pin, BUTTON2_Pin, BUTTON3_Pin, BUTTON4_Pin};
 
-static uint8_t buttonList[NUM_OF_BUTTON] = {BUTTON1_Pin, BUTTON2_Pin, BUTTON3_Pin, BUTTON4_Pin};
+int KeyReg0[NUM_OF_BUTTON] = {NORMAL_STATE, NORMAL_STATE, NORMAL_STATE, NORMAL_STATE};
+int KeyReg1[NUM_OF_BUTTON] = {NORMAL_STATE, NORMAL_STATE, NORMAL_STATE, NORMAL_STATE};
+int KeyReg2[NUM_OF_BUTTON] = {NORMAL_STATE, NORMAL_STATE, NORMAL_STATE, NORMAL_STATE};
+int KeyReg3[NUM_OF_BUTTON] = {NORMAL_STATE, NORMAL_STATE, NORMAL_STATE, NORMAL_STATE};
 
-static GPIO_PinState KeyReg0[NUM_OF_BUTTON] = {NORMAL_STATE, NORMAL_STATE, NORMAL_STATE, NORMAL_STATE};
-static GPIO_PinState KeyReg1[NUM_OF_BUTTON] = {NORMAL_STATE, NORMAL_STATE, NORMAL_STATE, NORMAL_STATE};
-static GPIO_PinState KeyReg2[NUM_OF_BUTTON] = {NORMAL_STATE, NORMAL_STATE, NORMAL_STATE, NORMAL_STATE};
-static GPIO_PinState KeyReg3[NUM_OF_BUTTON] = {NORMAL_STATE, NORMAL_STATE, NORMAL_STATE, NORMAL_STATE};
-
-static int TimeOutForKeyPress =  500;
-static uint8_t button_flag[NUM_OF_BUTTON] = {0, 0, 0, 0};
+int TimeOutForKeyPress =  500;
+int button_flag[NUM_OF_BUTTON] = {0, 0, 0, 0};
+int button_record[NUM_OF_BUTTON] = {0, 0, 0, 0};
 
 int isButtonPressed(int index){
 	if(button_flag[index] == 1){
@@ -27,12 +26,17 @@ int isButtonPressed(int index){
 	return 0;
 }
 
-void subKeyProcess(uint8_t index){
+int timeButtonPressed(int index){
+	return button_record[index];
+}
+
+void subKeyProcess(int index){
 	button_flag[index] = 1;
+	button_record[index]++;
 }
 
 void getKeyInput(){
-	for(uint8_t i=0; i<NUM_OF_BUTTON; i++){
+	for(int i=0; i<NUM_OF_BUTTON; i++){
 	  KeyReg2[i] = KeyReg1[i];
 	  KeyReg1[i] = KeyReg0[i];
 	  KeyReg0[i] = HAL_GPIO_ReadPin(GPIOA, buttonList[i]);

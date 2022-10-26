@@ -10,7 +10,8 @@
 
 #include "global.h"
 #include "main.h"
+#include "led_display.h"
 
-void fms_automatic_run();
+void fsm_automatic_run();
 
 #endif /* INC_FSM_AUTOMATIC_H_ */

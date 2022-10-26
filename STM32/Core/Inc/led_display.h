@@ -18,7 +18,7 @@ void enableRed2();
 void enableYellow2();
 void enableGreen2();
 
-void display7SEG1();
-void display7SEG2();
+void display7SEG1(int num);
+void display7SEG2(int num);
 
 #endif /* INC_LED_DISPLAY_H_ */
