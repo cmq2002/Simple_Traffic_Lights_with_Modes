@@ -9,6 +9,7 @@
 
 int status1 = 0;
 int status2 = 0;
+int status3 = 0;
 int mode = 0;
 
 int counterRed1 = 0;

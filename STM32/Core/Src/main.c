@@ -99,6 +99,7 @@ static void MX_GPIO_Init(void);
 void initVar(){
 	  status1 = INIT;
 	  status2 = INIT;
+	  status3 = INIT;
 	  mode = INIT;
 
 	  counterRed1 = AUTO_RED;

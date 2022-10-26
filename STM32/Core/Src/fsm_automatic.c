@@ -7,6 +7,7 @@
 
 #include "fsm_automatic.h"
 
+int led_buffer[2] = {0,0};
 //Each state will have 1s to perform task
 void fsm_automatic_run(void){
 	if (mode==MODE1){
@@ -14,13 +15,12 @@ void fsm_automatic_run(void){
 		switch (status1){
 			case INIT:
 				status1 = AUTO_RED;
-				setTimer1(100);
+				setTimer1(1);
 				break;
 			case AUTO_RED:
 				if (timer1_flag == 1){
 					enableRed1();
-//					blink7SEG1(counterRed1/10, DOZEN);
-//					blink7SEG1(counterRed1/10, UNIT);
+					led_buffer[0] = counterRed1;
 					display7SEG1(counterRed1%10);
 					counterRed1--;
 					if (counterRed1 == THRESHOLD){
@@ -33,8 +33,7 @@ void fsm_automatic_run(void){
 			case AUTO_GREEN:
 				if (timer1_flag == 1){
 					enableGreen1();
-//					blink7SEG1(counterGreen1/10, DOZEN);
-//					blink7SEG1(counterGreen1/10, UNIT);
+					led_buffer[0] = counterGreen1;
 					display7SEG1(counterGreen1%10);
 					counterGreen1--;
 					if (counterGreen1 == THRESHOLD){
@@ -47,8 +46,7 @@ void fsm_automatic_run(void){
 			case AUTO_YELLOW:
 				if (timer1_flag == 1){
 					enableYellow1();
-//					blink7SEG1(counterYellow1/10, DOZEN);
-//					blink7SEG1(counterYellow1/10, UNIT);
+					led_buffer[0] = counterYellow1;
 					display7SEG1(counterYellow1%10);
 					counterYellow1--;
 					if (counterYellow1 == THRESHOLD){
@@ -66,13 +64,12 @@ void fsm_automatic_run(void){
 		switch (status2){
 			case INIT:
 				status2 = AUTO_GREEN;
-				setTimer2(100);
+				setTimer2(1);
 				break;
 			case AUTO_RED:
 				if (timer2_flag == 1){
 					enableRed2();
-//					blink7SEG2(counterRed2/10, DOZEN);
-//					blink7SEG2(counterRed2%10, UNIT);
+					led_buffer[1] = counterRed2;
 					display7SEG2(counterRed2%10);
 					counterRed2--;
 					if (counterRed2 == THRESHOLD){
@@ -85,8 +82,7 @@ void fsm_automatic_run(void){
 			case AUTO_GREEN:
 				if (timer2_flag == 1){
 					enableGreen2();
-//					blink7SEG2(counterGreen2/10, DOZEN);
-//					blink7SEG2(counterGreen2%10, UNIT);
+					led_buffer[1] = counterGreen2;
 					display7SEG2(counterGreen2%10);
 					counterGreen2--;
 					if (counterGreen2 == THRESHOLD){
@@ -99,8 +95,7 @@ void fsm_automatic_run(void){
 			case AUTO_YELLOW:
 				if (timer2_flag == 1){
 					enableYellow2();
-//					blink7SEG2(counterYellow2/10, DOZEN);
-//					blink7SEG2(counterYellow2%10, UNIT);
+					led_buffer[1] = counterYellow2;
 					display7SEG2(counterYellow2%10);
 					counterYellow2--;
 					if (counterYellow2 == THRESHOLD){
@@ -113,6 +108,16 @@ void fsm_automatic_run(void){
 			default:
 				break;
 		}
+	}
+	switch (status3){
+		case INIT:
+			break;
+		case DOZEN:
+			break;
+		case UNIT:
+			break;
+		default:
+			break;
 	}
 //	switch (status){
 //		case INIT:

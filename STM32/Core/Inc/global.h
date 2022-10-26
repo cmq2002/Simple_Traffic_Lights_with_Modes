@@ -10,6 +10,7 @@
 
 #include"software_timer.h"
 #include "button.h"
+#include "led_display.h"
 
 // 4 modes available
 #define INIT 0
@@ -31,14 +32,15 @@
 #define AUTO_YELLOW 3
 #define THRESHOLD 0
 
-// use to specify which 7-seg led is blinked
-#define DOZEN 0
-#define UNIT 1
+//// use to specify which 7-seg led is blinked
+#define DOZEN 1
+#define UNIT 2
 
 // variables use to keep track the system
 extern int mode;
 extern int status1;
 extern int status2;
+extern int status3;
 
 extern int counterRed1 ;
 extern int counterGreen1 ;

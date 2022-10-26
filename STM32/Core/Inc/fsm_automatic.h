@@ -8,9 +8,8 @@
 #ifndef INC_FSM_AUTOMATIC_H_
 #define INC_FSM_AUTOMATIC_H_
 
-#include "global.h"
 #include "main.h"
-#include "led_display.h"
+#include "global.h"
 
 void fsm_automatic_run();
 

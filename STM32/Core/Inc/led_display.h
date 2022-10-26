@@ -9,6 +9,7 @@
 #define INC_LED_DISPLAY_H_
 
 #include "main.h"
+#include "global.h"
 
 void enableRed1();
 void enableYellow1();
@@ -21,7 +22,7 @@ void enableGreen2();
 void display7SEG1(int num);
 void display7SEG2(int num);
 
-void blink7SEG1(int num, int index);
-void blink7SEG2(int num, int index);
+void blink7SEG1(int num);
+void blink7SEG2(int num);
 
 #endif /* INC_LED_DISPLAY_H_ */
