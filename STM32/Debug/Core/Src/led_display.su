@@ -1,8 +1,10 @@
-led_display.c:25:6:enableRed1	8	static
-led_display.c:31:6:enableYellow1	8	static
-led_display.c:36:6:enableGreen1	8	static
-led_display.c:42:6:enableRed2	8	static
-led_display.c:47:6:enableYellow2	8	static
-led_display.c:52:6:enableGreen2	8	static
+led_display.c:10:6:enableRed1	8	static
+led_display.c:16:6:enableYellow1	8	static
+led_display.c:21:6:enableGreen1	8	static
+led_display.c:27:6:enableRed2	8	static
+led_display.c:32:6:enableYellow2	8	static
+led_display.c:37:6:enableGreen2	8	static
 led_display.c:58:6:display7SEG1	16	static
-led_display.c:69:6:display7SEG2	16	static
+led_display.c:70:6:display7SEG2	16	static
+led_display.c:82:6:blink7SEG1	16	static
+led_display.c:96:6:blink7SEG2	16	static
