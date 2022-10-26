@@ -11,28 +11,31 @@
 #include"software_timer.h"
 #include "button.h"
 
+// 4 modes available
 #define INIT 0
 #define MODE1  1
 #define MODE2  2
 #define MODE3  3
 #define MODE4  4
 
+// 4 buttons available
 #define NUM_OF_BUTTON 4
 #define BUTTON1 0
 #define BUTTON2 1
 #define BUTTON3 2
 #define BUTTON4 3
 
+// waiting time at each state
 #define AUTO_RED 5
 #define AUTO_GREEN 4
 #define AUTO_YELLOW 3
-
-//#define MAN_RED       12
-//#define MAN_GREEN     13
-//#define MAN_YELLOW    14
-
 #define THRESHOLD 0
 
+// use to specify which 7-seg led is blinked
+#define DOZEN 0
+#define UNIT 1
+
+// variables use to keep track the system
 extern int mode;
 extern int status1;
 extern int status2;

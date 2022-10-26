@@ -145,6 +145,7 @@ int main(void)
   /* USER CODE END 2 */
 
   /* Infinite loop */
+  initVar();
   /* USER CODE BEGIN WHILE */
   while (1)
   {
@@ -163,25 +164,30 @@ int main(void)
 //	  }
 
 	  //FSM
+	  if (isButtonPressed(BUTTON1)==0){
+		  mode = MODE1;
+	  }
+
 	  if (isButtonPressed(BUTTON1)==1){
 		  int state = timeButtonPressed(BUTTON1)%NUM_OF_BUTTON;
 		  switch(state){
-			  case 1:
+			  case 0:
 				  mode = MODE1;
 				  break;
-			  case 2:
+			  case 1:
 				  mode = MODE2;
 				  break;
-			  case 3:
+			  case 2:
 				  mode = MODE3;
 				  break;
-			  case 0:
+			  case 3:
 				  mode = MODE4;
 				  break;
 			  default:
 				  break;
 		  }
 	  }
+
 	  fsm_automatic_run();
 
 
