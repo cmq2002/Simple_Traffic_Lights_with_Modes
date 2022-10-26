@@ -27,8 +27,11 @@ void fsm_automatic_run(void){
 						statusAUTO1 = STATE_GREEN;
 					}
 					setTimer1(100);
-					if (isButtonPressed(BUTTON1)==1 && timeButtonPressed(BUTTON1)%NUM_OF_BUTTON==1)
-						mode = MODE2;
+				}
+
+				if (isButtonPressed(BUTTON1)==1 && timeButtonPressed(BUTTON1)%NUM_OF_BUTTON==1){
+					mode = MODE2;
+					setTimer1(1000);
 				}
 				break;
 			case STATE_GREEN:

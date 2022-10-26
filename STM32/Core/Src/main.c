@@ -117,7 +117,7 @@ int main(void)
 
 	  //FSM
 	  if (isButtonPressed(BUTTON1)==0){
-		  mode = MODE1;
+		  mode = MODE2;
 	  }
 
 //	  if (isButtonPressed(BUTTON1)==1){

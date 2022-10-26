@@ -16,7 +16,7 @@ void fsm_manual_run(){
 				switch (statusMODE2_1){
 					case INIT:
 						statusMODE2_1 = ON;
-						setTimer4(25);
+						setTimer4(1);
 						break;
 					case ON:
 						if (timer4_flag == 1){
@@ -37,20 +37,20 @@ void fsm_manual_run(){
 				switch (statusMODE2_2){
 					case INIT:
 						statusMODE2_2 = DOZEN;
-						setTimer5(50);
+						setTimer5(1);
 						break;
 					case DOZEN:
 						if (timer5_flag == 1){
 							blinkDigit1(mode, AUTO_RED);
 							statusMODE2_2 = UNIT;
-							setTimer5(50);
+							setTimer5(25);
 						}
 						break;
 					case UNIT:
 						if (timer5_flag == 1){
 							blinkDigit2(mode, AUTO_RED);
 							statusMODE2_2 = DOZEN;
-							setTimer5(50);
+							setTimer5(25);
 						}
 						break;
 					default:
