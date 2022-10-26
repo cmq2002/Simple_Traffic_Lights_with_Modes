@@ -118,14 +118,14 @@ void fsm_automatic_run(void){
 			if (timer3_flag == 1){
 				blink7SEG1(led_buffer[0]/10, led_buffer[1]/10);
 				status3 = UNIT;
-				setTimer3(50);
+				setTimer3(40);
 			}
 			break;
 		case UNIT:
 			if (timer3_flag == 1){
 				blink7SEG2(led_buffer[0]%10, led_buffer[1]%10);
 				status3 = DOZEN;
-				setTimer3(50);
+				setTimer3(60);
 			}
 			break;
 		default:

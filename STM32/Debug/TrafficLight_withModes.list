@@ -636,7 +636,7 @@ void fsm_automatic_run(void){
  80004da:	2b01      	cmp	r3, #1
  80004dc:	d007      	beq.n	80004ee <fsm_automatic_run+0x216>
 				status3 = DOZEN;
-				setTimer3(50);
+				setTimer3(60);
 			}
 			break;
 		default:
@@ -677,8 +677,8 @@ void fsm_automatic_run(void){
  800051c:	4b0f      	ldr	r3, [pc, #60]	; (800055c <fsm_automatic_run+0x284>)
  800051e:	2202      	movs	r2, #2
  8000520:	601a      	str	r2, [r3, #0]
-				setTimer3(50);
- 8000522:	2032      	movs	r0, #50	; 0x32
+				setTimer3(40);
+ 8000522:	2028      	movs	r0, #40	; 0x28
  8000524:	f000 fbce 	bl	8000cc4 <setTimer3>
 			break;
  8000528:	e047      	b.n	80005ba <fsm_automatic_run+0x2e2>
@@ -733,8 +733,8 @@ void fsm_automatic_run(void){
  80005a8:	4b09      	ldr	r3, [pc, #36]	; (80005d0 <fsm_automatic_run+0x2f8>)
  80005aa:	2201      	movs	r2, #1
  80005ac:	601a      	str	r2, [r3, #0]
-				setTimer3(50);
- 80005ae:	2032      	movs	r0, #50	; 0x32
+				setTimer3(60);
+ 80005ae:	203c      	movs	r0, #60	; 0x3c
  80005b0:	f000 fb88 	bl	8000cc4 <setTimer3>
 			break;
  80005b4:	e003      	b.n	80005be <fsm_automatic_run+0x2e6>
