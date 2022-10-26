@@ -27,9 +27,9 @@
 #define BUTTON4 3
 
 // waiting time at each state
-#define AUTO_RED 5
-#define AUTO_GREEN 4
-#define AUTO_YELLOW 3
+#define AUTO_RED 15
+#define AUTO_GREEN 8
+#define AUTO_YELLOW 5
 #define THRESHOLD 0
 
 //// use to specify which 7-seg led is blinked
