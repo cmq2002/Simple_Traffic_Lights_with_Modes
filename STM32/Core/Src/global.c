@@ -18,6 +18,14 @@ int statusMODE2_1 = 0;
 int statusMODE2_2 = 0;
 int statusMODE2_3 = 0;
 
+int statusMODE3_1 = 0;
+int statusMODE3_2 = 0;
+int statusMODE3_3 = 0;
+
+int statusMODE4_1 = 0;
+int statusMODE4_2 = 0;
+int statusMODE4_3 = 0;
+
 int AUTO_RED = 0;
 int AUTO_GREEN = 0;
 int AUTO_YELLOW = 0;
@@ -48,6 +56,14 @@ void initVar(void){
 	statusMODE2_2 = INIT;
 	statusMODE2_3 = INIT;
 
+	statusMODE3_1 = INIT;
+	statusMODE3_2 = INIT;
+	statusMODE3_3 = INIT;
+
+	statusMODE4_1 = INIT;
+	statusMODE4_2 = INIT;
+	statusMODE4_3 = INIT;
+
 	counterRed1 = AUTO_RED;
 	counterGreen1 = AUTO_GREEN;
 	counterYellow1 = AUTO_YELLOW;
@@ -55,4 +71,6 @@ void initVar(void){
 	counterRed2 = AUTO_RED;
 	counterGreen2 = AUTO_GREEN;
 	counterYellow2 = AUTO_YELLOW;
+
+	clearButtonRecord();
 }

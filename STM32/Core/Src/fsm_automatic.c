@@ -133,17 +133,6 @@ void fsm_automatic_run(void){
 				if (isButtonPressed(BUTTON1)==1
 					&& timeButtonPressed(BUTTON1)%NUM_OF_BUTTON==1)
 					mode = MODE2;
-				if (isButtonPressed(BUTTON1)==1
-					&& timeButtonPressed(BUTTON1)%NUM_OF_BUTTON==2)
-					mode = MODE3;
-				if (isButtonPressed(BUTTON1)==1
-					&& timeButtonPressed(BUTTON1)%NUM_OF_BUTTON==3)
-					mode = MODE4;
-				if (isButtonPressed(BUTTON1)==1
-					&& timeButtonPressed(BUTTON1)%NUM_OF_BUTTON==0){
-					mode = MODE1;
-					initVar();
-				}
 				break;
 			case MODE2:
 				if (isButtonPressed(BUTTON1)==1

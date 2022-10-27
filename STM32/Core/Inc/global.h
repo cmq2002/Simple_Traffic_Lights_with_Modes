@@ -21,10 +21,9 @@
 #define STATE_YELLOW 3
 
 // For Mode2-4
-#define ON 1
-#define OFF 2
-#define CHANGE 3
-#define SAVE 4
+#define TOGGLE 1
+#define CHANGE 2
+#define SAVE 3
 
 // Use to specify which 7-seg led is blinked
 #define DOZEN 1
@@ -75,6 +74,16 @@ extern int statusAUTO4; // For changing MODEs
 extern int statusMODE2_1; // For blink led
 extern int statusMODE2_2; // For display mode and value
 extern int statusMODE2_3; // For making changes in waiting time
+
+// Status for MODE3
+extern int statusMODE3_1; // For blink led
+extern int statusMODE3_2; // For display mode and value
+extern int statusMODE3_3; // For making changes in waiting time
+
+// Status for MODE4
+extern int statusMODE4_1; // For blink led
+extern int statusMODE4_2; // For display mode and value
+extern int statusMODE4_3; // For making changes in waiting time
 
 void initWaitingTime(void);
 void initVar(void);

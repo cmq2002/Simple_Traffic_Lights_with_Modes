@@ -30,6 +30,12 @@ int timeButtonPressed(int index){
 	return button_record[index];
 }
 
+void clearButtonRecord(){
+	for (int i=0; i<NUM_OF_BUTTON; i++){
+		button_record[i] = 0;
+	}
+}
+
 void subKeyProcess(int index){
 	button_flag[index] = 1;
 	button_record[index]++;

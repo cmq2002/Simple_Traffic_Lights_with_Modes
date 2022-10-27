@@ -23,6 +23,8 @@ int isButtonPressed();
 
 int timeButtonPressed();
 
+void clearButtonRecord();
+
 void getKeyInput();
 
 #endif /* INC_BUTTON_H_ */

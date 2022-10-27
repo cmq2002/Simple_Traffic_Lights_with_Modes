@@ -13,20 +13,15 @@ void fsm_manual_run(){
 		//Blink LEDs
 		switch (statusMODE2_1){
 			case INIT:
-				statusMODE2_1 = ON;
+				statusMODE2_1 = TOGGLE;
 				setTimer4(1);
 				break;
-			case ON:
+			case TOGGLE:
 				if (timer4_flag == 1){
 					toggleREDs();
 					setTimer4(25);
 				}
 				break;
-			case OFF:
-				if (timer4_flag == 1){
-					toggleREDs();
-					setTimer4(25);
-				}
 			default:
 				break;
 		}
@@ -58,18 +53,16 @@ void fsm_manual_run(){
 		// Changing Red Light Waiting Time
 		switch(statusMODE2_3){
 			case INIT:
-				if (isButtonPressed(BUTTON2)==1)
+				if (isButtonPressed(BUTTON2)==1){
 					statusMODE2_3 = CHANGE;
+					AUTO_RED+=1;
+				}
 				break;
 			case CHANGE:
 				if (isButtonPressed(BUTTON2)==1){
 					if (AUTO_RED > UPPER_BOUND) AUTO_RED = UPPER_BOUND;
 					if (AUTO_RED < LOWER_BOUND) AUTO_RED = LOWER_BOUND;
 					AUTO_RED += 1;
-				}
-				if (isButtonPressed(BUTTON1)==1
-					&& timeButtonPressed(BUTTON1)%NUM_OF_BUTTON==2){
-					mode = MODE3;
 				}
 				if (isButtonPressed(BUTTON4)==1) statusMODE2_3 = SAVE;
 				break;
@@ -80,6 +73,155 @@ void fsm_manual_run(){
 			default:
 				break;
 		}
+
+		if (isButtonPressed(BUTTON1)==1
+			&& timeButtonPressed(BUTTON1)%NUM_OF_BUTTON==2){
+			mode = MODE3;
+		}
+	}
+
+	if (mode == MODE3){
+		//Blink LEDs
+		switch (statusMODE3_1){
+			case INIT:
+				statusMODE3_1 = TOGGLE;
+				setTimer6(1);
+				break;
+			case TOGGLE:
+				if (timer6_flag == 1){
+					toggleGREENs();
+					setTimer6(25);
+				}
+				break;
+			default:
+				break;
+		}
+
+		//Show mode and value
+		switch (statusMODE3_2){
+			case INIT:
+				statusMODE3_2 = DOZEN;
+				setTimer7(1);
+				break;
+			case DOZEN:
+				if (timer7_flag == 1){
+					blinkDigit1(mode, AUTO_GREEN);
+					statusMODE3_2 = UNIT;
+					setTimer7(25);
+				}
+				break;
+			case UNIT:
+				if (timer7_flag == 1){
+					blinkDigit2(mode, AUTO_GREEN);
+					statusMODE3_2 = DOZEN;
+					setTimer7(25);
+				}
+				break;
+			default:
+				break;
+		}
+
+		// Changing Green Light Waiting Time
+		switch(statusMODE3_3){
+			case INIT:
+				if (isButtonPressed(BUTTON2)==1){
+					statusMODE3_3 = CHANGE;
+					AUTO_GREEN+=1;
+				}
+				break;
+			case CHANGE:
+				if (isButtonPressed(BUTTON2)==1){
+					if (AUTO_GREEN > UPPER_BOUND) AUTO_GREEN = UPPER_BOUND;
+					if (AUTO_GREEN < LOWER_BOUND) AUTO_GREEN = LOWER_BOUND;
+					AUTO_GREEN += 1;
+				}
+				if (isButtonPressed(BUTTON4)==1) statusMODE3_3 = SAVE;
+				break;
+			case SAVE:
+				mode = MODE1;
+				initVar();
+				break;
+			default:
+				break;
+		}
+
+		if (isButtonPressed(BUTTON1)==1
+			&& timeButtonPressed(BUTTON1)%NUM_OF_BUTTON==3){
+			mode = MODE4;
+		}
+	}
+
+	if (mode == MODE4){
+		//Blink LEDs
+		switch (statusMODE4_1){
+			case INIT:
+				statusMODE4_1 = TOGGLE;
+				setTimer8(1);
+				break;
+			case TOGGLE:
+				if (timer8_flag == 1){
+					toggleYELLOWs();
+					setTimer8(25);
+				}
+				break;
+			default:
+				break;
+		}
+
+		//Show mode and value
+		switch (statusMODE4_2){
+			case INIT:
+				statusMODE4_2 = DOZEN;
+				setTimer9(1);
+				break;
+			case DOZEN:
+				if (timer9_flag == 1){
+					blinkDigit1(mode, AUTO_YELLOW);
+					statusMODE4_2 = UNIT;
+					setTimer9(25);
+				}
+				break;
+			case UNIT:
+				if (timer9_flag == 1){
+					blinkDigit2(mode, AUTO_YELLOW);
+					statusMODE4_2 = DOZEN;
+					setTimer9(25);
+				}
+				break;
+			default:
+				break;
+		}
+
+		// Changing Green Light Waiting Time
+		switch(statusMODE4_3){
+			case INIT:
+				if (isButtonPressed(BUTTON2)==1){
+					statusMODE4_3 = CHANGE;
+					AUTO_YELLOW+=1;
+				}
+				break;
+			case CHANGE:
+				if (isButtonPressed(BUTTON2)==1){
+					if (AUTO_YELLOW > UPPER_BOUND) AUTO_YELLOW = UPPER_BOUND;
+					if (AUTO_YELLOW < LOWER_BOUND) AUTO_YELLOW = LOWER_BOUND;
+					AUTO_YELLOW += 1;
+				}
+				if (isButtonPressed(BUTTON4)==1) statusMODE4_3 = SAVE;
+				break;
+			case SAVE:
+				mode = MODE1;
+				initVar();
+				break;
+			default:
+				break;
+		}
+
+		if (isButtonPressed(BUTTON1)==1
+			&& timeButtonPressed(BUTTON1)%NUM_OF_BUTTON==0){
+			mode = MODE1;
+			initVar();
+		}
 	}
 }
+
 

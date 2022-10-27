@@ -1,4 +1,5 @@
 button.c:21:5:isButtonPressed	16	static
 button.c:29:5:timeButtonPressed	16	static
-button.c:33:6:subKeyProcess	16	static
-button.c:38:6:getKeyInput	16	static
+button.c:33:6:clearButtonRecord	16	static
+button.c:39:6:subKeyProcess	16	static
+button.c:44:6:getKeyInput	16	static
