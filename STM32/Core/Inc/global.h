@@ -14,6 +14,7 @@
 
 /*-------------------------------- Define States -------------------------------*/
 #define INIT 0
+
 // For Mode1
 #define STATE_RED 1
 #define STATE_GREEN 2
@@ -22,6 +23,8 @@
 // For Mode2-4
 #define ON 1
 #define OFF 2
+#define CHANGE 3
+#define SAVE 4
 
 // Use to specify which 7-seg led is blinked
 #define DOZEN 1
@@ -63,13 +66,12 @@ extern int counterYellow2 ;
 extern int statusAUTO1; // For displaying traffic light
 extern int statusAUTO2;
 extern int statusAUTO3; // For displaying countdown number
+extern int statusAUTO4; // For changing MODEs
 
 // Status for MODE2
 extern int statusMODE2_1; // For blink led
 extern int statusMODE2_2; // For display mode and value
 extern int statusMODE2_3; // For making changes in waiting time
-
-
 
 void initWaitingTime(void);
 void initVar(void);

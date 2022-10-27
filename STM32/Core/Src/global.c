@@ -12,6 +12,7 @@ int mode = 0;
 int statusAUTO1 = 0;
 int statusAUTO2 = 0;
 int statusAUTO3 = 0;
+int statusAUTO4 = 0;
 
 int statusMODE2_1 = 0;
 int statusMODE2_2 = 0;
@@ -36,11 +37,12 @@ void initWaitingTime(void){
 }
 
 void initVar(void){
-	mode = INIT;
+	mode = MODE1;
 
 	statusAUTO1 = INIT;
 	statusAUTO2 = INIT;
 	statusAUTO3 = INIT;
+	statusAUTO4 = INIT;
 
 	statusMODE2_1 = INIT;
 	statusMODE2_2 = INIT;

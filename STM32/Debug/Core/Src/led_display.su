@@ -7,7 +7,8 @@ led_display.c:37:6:enableGreen2	8	static
 led_display.c:43:6:toggleREDs	8	static
 led_display.c:51:6:toggleGREENs	8	static
 led_display.c:59:6:toggleYELLOWs	8	static
-led_display.c:83:6:display7SEG1	16	static
-led_display.c:93:6:display7SEG2	16	static
-led_display.c:103:6:blinkDigit1	16	static
-led_display.c:112:6:blinkDigit2	16	static
+led_display.c:68:6:clearLEDs	8	static
+led_display.c:92:6:display7SEG1	16	static
+led_display.c:102:6:display7SEG2	16	static
+led_display.c:112:6:blinkDigit1	16	static
+led_display.c:121:6:blinkDigit2	16	static

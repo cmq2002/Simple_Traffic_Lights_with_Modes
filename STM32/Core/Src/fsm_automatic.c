@@ -10,7 +10,7 @@
 int led_buffer[2] = {0,0};
 //Each state will have 1s to perform task
 void fsm_automatic_run(void){
-	if (mode==MODE1){
+	if (mode == MODE1){
 		//For W-E direction
 		switch (statusAUTO1){
 			case INIT:
@@ -103,6 +103,7 @@ void fsm_automatic_run(void){
 				break;
 		}
 
+		// Display waiting time
 		switch (statusAUTO3){
 			case INIT:
 				statusAUTO3 = DOZEN;
@@ -125,45 +126,35 @@ void fsm_automatic_run(void){
 			default:
 				break;
 		}
+
+		// Move to Modify Mode
+		switch(statusAUTO4){
+			case INIT:
+				if (isButtonPressed(BUTTON1)==1
+					&& timeButtonPressed(BUTTON1)%NUM_OF_BUTTON==1)
+					mode = MODE2;
+				break;
+			case MODE2:
+				if (isButtonPressed(BUTTON1)==1
+					&& timeButtonPressed(BUTTON1)%NUM_OF_BUTTON==2)
+					mode = MODE3;
+				clearLEDs();
+				break;
+			case MODE3:
+				if (isButtonPressed(BUTTON1)==1
+					&& timeButtonPressed(BUTTON1)%NUM_OF_BUTTON==3)
+					mode = MODE4;
+				clearLEDs();
+				break;
+			case MODE4:
+				if (isButtonPressed(BUTTON1)==1
+					&& timeButtonPressed(BUTTON1)%NUM_OF_BUTTON==0)
+					mode = MODE1;
+				clearLEDs();
+				break;
+			default:
+				break;
+		}
 	}
 
-	if (isButtonPressed(BUTTON1)==1 && timeButtonPressed(BUTTON1)%NUM_OF_BUTTON==1){
-		mode = MODE2;
-		setTimer1(1000);
-		setTimer2(1000);
-		setTimer3(1000);
-	}
-
-	//	switch (status){
-	//		case INIT:
-	//			status = AUTO_RED;
-	//			setTimer1(500);
-	//			break;
-	//		case AUTO_RED:
-	//			if (timer1_flag == 1){
-	//				status = AUTO_GREEN;
-	//				setTimer1(300);
-	//			}
-	//			if (button1_flag == 1){
-	//				button1_flag = 0;
-	//				status = MAN_RED;
-	//				setTimer1(1000);
-	//			}
-	//			HAL_GPIO_TogglePin(LED_RED1_GPIO_Port, LED_RED1_Pin);
-	//			break;
-	//		case AUTO_GREEN:
-	//			if (timer1_flag == 1){
-	//				status = AUTO_YELLOW;
-	//				setTimer1(200);
-	//			}
-	//			break;
-	//		case AUTO_YELLOW:
-	//			if (timer1_flag == 1){
-	//				status = AUTO_RED;
-	//				setTimer1(500);
-	//			}
-	//			break;
-	//		default:
-	//			break;
-	//	}
 }
