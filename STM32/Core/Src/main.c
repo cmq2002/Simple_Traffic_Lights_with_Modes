@@ -115,30 +115,36 @@ int main(void)
 //		  HAL_GPIO_TogglePin(LED_RED1_GPIO_Port, LED_RED1_Pin);
 //	  }
 
+	  // Testing button
+//	  if (isButtonPressed(BUTTON1)==1) toggleREDs();
+//	  if (isButtonPressed(BUTTON2)==1) toggleGREENs();
+//	  if (isButtonPressed(BUTTON3)==1) toggleYELLOWs();
+//	  if (isButtonPressed(BUTTON4)==1) enableRed2();
+
 	  //FSM
 	  if (isButtonPressed(BUTTON1)==0){
-		  mode = MODE2;
+		  mode = MODE1;
 	  }
 
-//	  if (isButtonPressed(BUTTON1)==1){
-//		  int state = timeButtonPressed(BUTTON1)%NUM_OF_BUTTON;
-//		  switch(state){
-//			  case 0:
-//				  mode = MODE1;
-//				  break;
-//			  case 1:
-//				  mode = MODE2;
-//				  break;
-//			  case 2:
-//				  mode = MODE3;
-//				  break;
-//			  case 3:
-//				  mode = MODE4;
-//				  break;
-//			  default:
-//				  break;
-//		  }
-//	  }
+	  if (isButtonPressed(BUTTON1)==1){
+		  int state = timeButtonPressed(BUTTON1)%NUM_OF_BUTTON;
+		  switch(state){
+			  case 0:
+				  mode = MODE1;
+				  break;
+			  case 1:
+				  mode = MODE2;
+				  break;
+			  case 2:
+				  mode = MODE3;
+				  break;
+			  case 3:
+				  mode = MODE4;
+				  break;
+			  default:
+				  break;
+		  }
+	  }
 
 	  fsm_automatic_run();
 	  fsm_manual_run();

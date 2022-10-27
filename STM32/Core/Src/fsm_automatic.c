@@ -28,11 +28,6 @@ void fsm_automatic_run(void){
 					}
 					setTimer1(100);
 				}
-
-				if (isButtonPressed(BUTTON1)==1 && timeButtonPressed(BUTTON1)%NUM_OF_BUTTON==1){
-					mode = MODE2;
-					setTimer1(1000);
-				}
 				break;
 			case STATE_GREEN:
 				if (timer1_flag == 1){
@@ -107,29 +102,38 @@ void fsm_automatic_run(void){
 			default:
 				break;
 		}
-	}
-	switch (statusAUTO3){
-		case INIT:
-			statusAUTO3 = DOZEN;
-			setTimer3(100);
-			break;
-		case DOZEN:
-			if (timer3_flag == 1){
-				blinkDigit1(led_buffer[0], led_buffer[1]);
-				statusAUTO3 = UNIT;
-				setTimer3(50);
-			}
-			break;
-		case UNIT:
-			if (timer3_flag == 1){
-				blinkDigit2(led_buffer[0], led_buffer[1]);
+
+		switch (statusAUTO3){
+			case INIT:
 				statusAUTO3 = DOZEN;
-				setTimer3(50);
-			}
-			break;
-		default:
-			break;
+				setTimer3(100);
+				break;
+			case DOZEN:
+				if (timer3_flag == 1){
+					blinkDigit1(led_buffer[0], led_buffer[1]);
+					statusAUTO3 = UNIT;
+					setTimer3(50);
+				}
+				break;
+			case UNIT:
+				if (timer3_flag == 1){
+					blinkDigit2(led_buffer[0], led_buffer[1]);
+					statusAUTO3 = DOZEN;
+					setTimer3(50);
+				}
+				break;
+			default:
+				break;
+		}
 	}
+
+	if (isButtonPressed(BUTTON1)==1 && timeButtonPressed(BUTTON1)%NUM_OF_BUTTON==1){
+		mode = MODE2;
+		setTimer1(1000);
+		setTimer2(1000);
+		setTimer3(1000);
+	}
+
 	//	switch (status){
 	//		case INIT:
 	//			status = AUTO_RED;
