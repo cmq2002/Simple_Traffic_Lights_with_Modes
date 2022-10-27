@@ -62,17 +62,20 @@ void fsm_manual_run(){
 					statusMODE2_3 = CHANGE;
 				break;
 			case CHANGE:
-				if (isButtonPressed(BUTTON2)==1) AUTO_RED++;
+				if (isButtonPressed(BUTTON2)==1){
+					if (AUTO_RED > UPPER_BOUND) AUTO_RED = UPPER_BOUND;
+					if (AUTO_RED < LOWER_BOUND) AUTO_RED = LOWER_BOUND;
+					AUTO_RED += 1;
+				}
 				if (isButtonPressed(BUTTON1)==1
 					&& timeButtonPressed(BUTTON1)%NUM_OF_BUTTON==2){
 					mode = MODE3;
-					clearLEDs();
 				}
 				if (isButtonPressed(BUTTON4)==1) statusMODE2_3 = SAVE;
 				break;
 			case SAVE:
 				mode = MODE1;
-				clearLEDs();
+				initVar();
 				break;
 			default:
 				break;

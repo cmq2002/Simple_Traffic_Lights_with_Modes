@@ -30,6 +30,9 @@
 #define DOZEN 1
 #define UNIT 2
 
+// Threshold for waiting time
+#define UPPER_BOUND 99
+#define LOWER_BOUND 1
 
 /*-----------------------------4 modes available--------------------------------*/
 #define MODE1  1
