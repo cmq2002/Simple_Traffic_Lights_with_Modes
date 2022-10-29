@@ -1516,7 +1516,7 @@ void fsm_manual_run(){
  8000a74:	bf00      	nop
 		}
 
-		// Changing Green Light Waiting Time
+		// Changing YELLOW Light Waiting Time
 		switch(statusMODE4_3){
  8000a76:	4b34      	ldr	r3, [pc, #208]	; (8000b48 <fsm_manual_run+0x4a0>)
  8000a78:	681b      	ldr	r3, [r3, #0]
