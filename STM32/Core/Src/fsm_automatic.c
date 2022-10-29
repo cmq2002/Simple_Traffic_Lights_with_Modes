@@ -130,24 +130,21 @@ void fsm_automatic_run(void){
 		// Move to Modify Mode
 		switch(statusAUTO4){
 			case INIT:
-				if (isButtonPressed(BUTTON1)==1
-					&& timeButtonPressed(BUTTON1)%NUM_OF_BUTTON==1)
+				if (isButtonPressed(BUTTON1)==1)
 					mode = MODE2;
 				break;
 			case MODE2:
-				if (isButtonPressed(BUTTON1)==1
-					&& timeButtonPressed(BUTTON1)%NUM_OF_BUTTON==2)
+				if (isButtonPressed(BUTTON1)==1)
 					mode = MODE3;
 				break;
 			case MODE3:
-				if (isButtonPressed(BUTTON1)==1
-					&& timeButtonPressed(BUTTON1)%NUM_OF_BUTTON==3)
+				if (isButtonPressed(BUTTON1)==1)
 					mode = MODE4;
 				break;
 			case MODE4:
-				if (isButtonPressed(BUTTON1)==1
-					&& timeButtonPressed(BUTTON1)%NUM_OF_BUTTON==0)
+				if (isButtonPressed(BUTTON1)==1)
 					mode = MODE1;
+				initVar();
 				break;
 			default:
 				break;

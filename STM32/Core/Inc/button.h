@@ -21,9 +21,9 @@
 
 int isButtonPressed();
 
-int timeButtonPressed();
+//int timeButtonPressed();
 
-void clearButtonRecord();
+//void clearButtonRecord();
 
 void getKeyInput();
 

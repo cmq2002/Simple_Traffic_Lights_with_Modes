@@ -71,6 +71,4 @@ void initVar(void){
 	counterRed2 = AUTO_RED;
 	counterGreen2 = AUTO_GREEN;
 	counterYellow2 = AUTO_YELLOW;
-
-	clearButtonRecord();
 }

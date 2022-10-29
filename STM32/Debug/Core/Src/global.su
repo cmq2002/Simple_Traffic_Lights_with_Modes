@@ -1,2 +1,2 @@
 global.c:41:6:initWaitingTime	4	static
-global.c:47:6:initVar	8	static
+global.c:47:6:initVar	4	static
