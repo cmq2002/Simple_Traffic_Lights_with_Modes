@@ -192,7 +192,7 @@ void fsm_manual_run(){
 				break;
 		}
 
-		// Changing Green Light Waiting Time
+		// Changing YELLOW Light Waiting Time
 		switch(statusMODE4_3){
 			case INIT:
 				if (isButtonPressed(BUTTON2)==1){
