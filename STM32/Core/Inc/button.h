@@ -18,12 +18,7 @@
 // not allow main to access flag
 // extern int button1_flag;
 
-
 int isButtonPressed();
-
-//int timeButtonPressed();
-
-//void clearButtonRecord();
 
 void getKeyInput();
 

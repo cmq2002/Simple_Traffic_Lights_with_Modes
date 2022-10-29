@@ -114,10 +114,6 @@ int isButtonPressed(int index){
  800017c:	2000007c 	.word	0x2000007c
 
 08000180 <subKeyProcess>:
-//	for (int i=0; i<NUM_OF_BUTTON; i++){
-//		button_record[i] = 0;
-//	}
-//}
 
 void subKeyProcess(int index){
  8000180:	b480      	push	{r7}
@@ -129,7 +125,6 @@ void subKeyProcess(int index){
  800018a:	687b      	ldr	r3, [r7, #4]
  800018c:	2101      	movs	r1, #1
  800018e:	f842 1023 	str.w	r1, [r2, r3, lsl #2]
-//	button_record[index]++;
 }
  8000192:	bf00      	nop
  8000194:	370c      	adds	r7, #12
@@ -1524,13 +1519,13 @@ int counterYellow2 = 0;
 void initWaitingTime(void){
  8000a40:	b480      	push	{r7}
  8000a42:	af00      	add	r7, sp, #0
-	AUTO_RED = 65;
+	AUTO_RED = 15;
  8000a44:	4b06      	ldr	r3, [pc, #24]	; (8000a60 <initWaitingTime+0x20>)
- 8000a46:	2241      	movs	r2, #65	; 0x41
+ 8000a46:	220f      	movs	r2, #15
  8000a48:	601a      	str	r2, [r3, #0]
-	AUTO_GREEN = 88;
+	AUTO_GREEN = 28;
  8000a4a:	4b06      	ldr	r3, [pc, #24]	; (8000a64 <initWaitingTime+0x24>)
- 8000a4c:	2258      	movs	r2, #88	; 0x58
+ 8000a4c:	221c      	movs	r2, #28
  8000a4e:	601a      	str	r2, [r3, #0]
 	AUTO_YELLOW = 3;
  8000a50:	4b05      	ldr	r3, [pc, #20]	; (8000a68 <initWaitingTime+0x28>)
