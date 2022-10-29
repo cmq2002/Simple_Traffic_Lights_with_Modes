@@ -7,7 +7,7 @@
   - At least 3 buttons
     - Button 1 for changing modes
     - Button 2 for increasing waiting time
-    - Button 3 for decreasing waiting time
+    - Button 3 for decreasing waiting time (additional)
     - Button 4 for set changes
 - The application has 4 modes which is controlled by the first button. Mode
 1 is a normal mode, while modes 2 3 4 are modification modes. You can press the
