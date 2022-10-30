@@ -22,8 +22,9 @@
 
 // For Mode2-4
 #define TOGGLE 1
-#define CHANGE 2
-#define SAVE 3
+#define INCREASE 2
+#define DECREASE 3
+#define SAVE 4
 
 // Use to specify which 7-seg led is blinked
 #define DOZEN 1

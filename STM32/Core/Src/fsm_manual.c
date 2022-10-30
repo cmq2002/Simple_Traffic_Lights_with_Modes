@@ -54,15 +54,37 @@ void fsm_manual_run(){
 		switch(statusMODE2_3){
 			case INIT:
 				if (isButtonPressed(BUTTON2)==1){
-					statusMODE2_3 = CHANGE;
+					statusMODE2_3 = INCREASE;
 					AUTO_RED+=1;
 				}
+
+				if (isButtonPressed(BUTTON3)==1){
+					statusMODE2_3 = DECREASE;
+					AUTO_RED-=1;
+				}
 				break;
-			case CHANGE:
+			case INCREASE:
 				if (isButtonPressed(BUTTON2)==1){
-					if (AUTO_RED > UPPER_BOUND) AUTO_RED = UPPER_BOUND;
-					if (AUTO_RED < LOWER_BOUND) AUTO_RED = LOWER_BOUND;
 					AUTO_RED += 1;
+					if (AUTO_RED > UPPER_BOUND) AUTO_RED = UPPER_BOUND;
+				}
+				if (isButtonPressed(BUTTON3)==1){
+					AUTO_RED -= 1;
+					if (AUTO_RED < LOWER_BOUND) AUTO_RED = LOWER_BOUND;
+					statusMODE2_3 = DECREASE;
+				}
+				if (isButtonPressed(BUTTON4)==1) statusMODE2_3 = SAVE;
+				break;
+			case DECREASE:
+				if (isButtonPressed(BUTTON2)==1){
+					AUTO_RED += 1;
+					if (AUTO_RED > UPPER_BOUND) AUTO_RED = UPPER_BOUND;
+					statusMODE2_3 = INCREASE;
+				}
+
+				if (isButtonPressed(BUTTON3)==1){
+					AUTO_RED -= 1;
+					if (AUTO_RED < LOWER_BOUND) AUTO_RED = LOWER_BOUND;
 				}
 				if (isButtonPressed(BUTTON4)==1) statusMODE2_3 = SAVE;
 				break;
@@ -124,16 +146,42 @@ void fsm_manual_run(){
 		switch(statusMODE3_3){
 			case INIT:
 				if (isButtonPressed(BUTTON2)==1){
-					statusMODE3_3 = CHANGE;
+					statusMODE3_3 = INCREASE;
 					AUTO_GREEN+=1;
 				}
-				break;
-			case CHANGE:
-				if (isButtonPressed(BUTTON2)==1){
-					if (AUTO_GREEN > UPPER_BOUND) AUTO_GREEN = UPPER_BOUND;
-					if (AUTO_GREEN < LOWER_BOUND) AUTO_GREEN = LOWER_BOUND;
-					AUTO_GREEN += 1;
+
+				if (isButtonPressed(BUTTON3)==1){
+					statusMODE3_3 = DECREASE;
+					AUTO_GREEN-=1;
 				}
+				break;
+			case INCREASE:
+				if (isButtonPressed(BUTTON2)==1){
+					AUTO_GREEN += 1;
+					if (AUTO_GREEN > UPPER_BOUND) AUTO_GREEN = UPPER_BOUND;
+				}
+
+				if (isButtonPressed(BUTTON3)==1){
+					AUTO_GREEN -= 1;
+					if (AUTO_GREEN < LOWER_BOUND) AUTO_GREEN = LOWER_BOUND;
+					statusMODE3_3 = DECREASE;
+				}
+
+				if (isButtonPressed(BUTTON4)==1) statusMODE3_3 = SAVE;
+				break;
+
+			case DECREASE:
+				if (isButtonPressed(BUTTON2)==1){
+					AUTO_GREEN += 1;
+					if (AUTO_GREEN > UPPER_BOUND) AUTO_GREEN = UPPER_BOUND;
+					statusMODE3_3 = INCREASE;
+				}
+
+				if (isButtonPressed(BUTTON3)==1){
+					AUTO_GREEN -= 1;
+					if (AUTO_GREEN < LOWER_BOUND) AUTO_GREEN = LOWER_BOUND;
+				}
+
 				if (isButtonPressed(BUTTON4)==1) statusMODE3_3 = SAVE;
 				break;
 			case SAVE:
@@ -194,16 +242,41 @@ void fsm_manual_run(){
 		switch(statusMODE4_3){
 			case INIT:
 				if (isButtonPressed(BUTTON2)==1){
-					statusMODE4_3 = CHANGE;
+					statusMODE4_3 = INCREASE;
 					AUTO_YELLOW+=1;
 				}
-				break;
-			case CHANGE:
-				if (isButtonPressed(BUTTON2)==1){
-					if (AUTO_YELLOW > UPPER_BOUND) AUTO_YELLOW = UPPER_BOUND;
-					if (AUTO_YELLOW < LOWER_BOUND) AUTO_YELLOW = LOWER_BOUND;
-					AUTO_YELLOW += 1;
+
+				if (isButtonPressed(BUTTON3)==1){
+					statusMODE4_3 = DECREASE;
+					AUTO_YELLOW-=1;
 				}
+				break;
+			case INCREASE:
+				if (isButtonPressed(BUTTON2)==1){
+					AUTO_YELLOW += 1;
+					if (AUTO_YELLOW > UPPER_BOUND) AUTO_YELLOW = UPPER_BOUND;
+				}
+
+				if (isButtonPressed(BUTTON3)==1){
+					AUTO_YELLOW -= 1;
+					if (AUTO_YELLOW < LOWER_BOUND) AUTO_YELLOW = LOWER_BOUND;
+					statusMODE4_3 = DECREASE;
+				}
+
+				if (isButtonPressed(BUTTON4)==1) statusMODE4_3 = SAVE;
+				break;
+			case DECREASE:
+				if (isButtonPressed(BUTTON2)==1){
+					AUTO_YELLOW += 1;
+					if (AUTO_YELLOW > UPPER_BOUND) AUTO_YELLOW = UPPER_BOUND;
+					statusMODE4_3 = INCREASE;
+				}
+
+				if (isButtonPressed(BUTTON3)==1){
+					AUTO_YELLOW -= 1;
+					if (AUTO_YELLOW < LOWER_BOUND) AUTO_YELLOW = LOWER_BOUND;
+				}
+
 				if (isButtonPressed(BUTTON4)==1) statusMODE4_3 = SAVE;
 				break;
 			case SAVE:
