@@ -16,7 +16,6 @@ int KeyReg3[NUM_OF_BUTTON] = {NORMAL_STATE, NORMAL_STATE, NORMAL_STATE, NORMAL_S
 
 int TimeOutForKeyPress =  500;
 int button_flag[NUM_OF_BUTTON] = {0, 0, 0, 0};
-int button_record[NUM_OF_BUTTON] = {0, 0, 0, 0};
 
 int isButtonPressed(int index){
 	if(button_flag[index] == 1){

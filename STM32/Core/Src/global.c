@@ -39,8 +39,8 @@ int counterGreen2 = 0;
 int counterYellow2 = 0;
 
 void initWaitingTime(void){
-	AUTO_RED = 15;
-	AUTO_GREEN = 28;
+	AUTO_RED = 25;
+	AUTO_GREEN = 18;
 	AUTO_YELLOW = 3;
 }
 
